@@ -18,7 +18,7 @@ export function GovFormSandbox() {
   const [vals, setVals] = useState<string[]>(["", "", "", ""]);
   const [showPlain, setShowPlain] = useState(false);
   const [mode, setMode] = useState<"fill" | "review" | "done">("fill");
-  const f = fields[i];
+  const f = fields[i]!;
 
   const guide = mode === "done" ? t("formDone") : mode === "review" ? t("notSubmitted") : showPlain ? `${t(f.term)} = ${t(f.plain)}` : t("fG1");
 
@@ -66,7 +66,7 @@ export function GovFormSandbox() {
                 {fields.map((x, k) => (
                   <div key={k} className="p-4">
                     <dt className="text-muted-foreground">{t(x.term)}</dt>
-                    <dd className="text-xl font-bold">{vals[k] || t("empty")}</dd>
+                    <dd className="text-xl font-bold">{vals[k] ? vals[k] : t("empty")}</dd>
                   </div>
                 ))}
               </dl>
