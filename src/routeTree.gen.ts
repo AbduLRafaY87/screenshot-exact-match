@@ -10,33 +10,73 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BankingRouteImport } from './routes/banking'
+import { Route as FormsRouteImport } from './routes/forms'
+import { Route as ScamShieldRouteImport } from './routes/scam-shield'
+import { Route as VideoCheckRouteImport } from './routes/video-check'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BankingRoute = BankingRouteImport.update({
+  id: '/banking',
+  path: '/banking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FormsRoute = FormsRouteImport.update({
+  id: '/forms',
+  path: '/forms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScamShieldRoute = ScamShieldRouteImport.update({
+  id: '/scam-shield',
+  path: '/scam-shield',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VideoCheckRoute = VideoCheckRouteImport.update({
+  id: '/video-check',
+  path: '/video-check',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/banking': typeof BankingRoute
+  '/forms': typeof FormsRoute
+  '/scam-shield': typeof ScamShieldRoute
+  '/video-check': typeof VideoCheckRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/banking': typeof BankingRoute
+  '/forms': typeof FormsRoute
+  '/scam-shield': typeof ScamShieldRoute
+  '/video-check': typeof VideoCheckRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/banking': typeof BankingRoute
+  '/forms': typeof FormsRoute
+  '/scam-shield': typeof ScamShieldRoute
+  '/video-check': typeof VideoCheckRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/banking' | '/forms' | '/scam-shield' | '/video-check'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/banking' | '/forms' | '/scam-shield' | '/video-check'
+  id: '__root__' | '/' | '/banking' | '/forms' | '/scam-shield' | '/video-check'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BankingRoute: typeof BankingRoute
+  FormsRoute: typeof FormsRoute
+  ScamShieldRoute: typeof ScamShieldRoute
+  VideoCheckRoute: typeof VideoCheckRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +88,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/banking': {
+      id: '/banking'
+      path: '/banking'
+      fullPath: '/banking'
+      preLoaderRoute: typeof BankingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forms': {
+      id: '/forms'
+      path: '/forms'
+      fullPath: '/forms'
+      preLoaderRoute: typeof FormsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scam-shield': {
+      id: '/scam-shield'
+      path: '/scam-shield'
+      fullPath: '/scam-shield'
+      preLoaderRoute: typeof ScamShieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/video-check': {
+      id: '/video-check'
+      path: '/video-check'
+      fullPath: '/video-check'
+      preLoaderRoute: typeof VideoCheckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BankingRoute: BankingRoute,
+  FormsRoute: FormsRoute,
+  ScamShieldRoute: ScamShieldRoute,
+  VideoCheckRoute: VideoCheckRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
