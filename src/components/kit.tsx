@@ -27,11 +27,11 @@ export const Btn = forwardRef<HTMLButtonElement, BtnProps>(({ variant = "primary
 ));
 Btn.displayName = "Btn";
 
-export function SpeakButton({ text, className }: { text: string; className?: string }) {
+export function SpeakButton({ text, className, label }: { text: string; className?: string; label?: string | undefined }) {
   const { t, lang } = useT();
   return (
     <Btn variant="soft" className={cn("text-base", className)} onClick={() => speak(text, lang) || alert(t("noVoice"))}>
-      <Volume2 aria-hidden className="size-6" /> {t("readAloud")}
+      <Volume2 aria-hidden className="size-6" /> {label ?? t("readAloud")}
     </Btn>
   );
 }
