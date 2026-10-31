@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Volume2, Sparkles, ShieldCheck, ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { speak, useT } from "@/lib/i18n";
+import { useLocation } from "@tanstack/react-router";
+import { practiceModules } from "@/lib/playground";
 
 const variants = {
   primary: "bg-primary text-primary-foreground hover:brightness-110",
@@ -102,9 +104,11 @@ export function GuidePanel({
 }
 
 export function PageTitle({ tag, title }: { tag: string; title: string }) {
+  const { pathname } = useLocation();
+  const activity = practiceModules.find((module) => module.to === pathname);
   return (
-    <div className="mb-8 space-y-2">
-      <p className="inline-flex rounded-full bg-secondary px-4 py-1 text-base font-bold text-secondary-foreground">{tag}</p>
+    <div className={cn("mb-8 space-y-2", activity?.tone)}>
+      <p className="inline-flex items-center gap-2 rounded-lg border border-activity-border bg-activity-soft px-4 py-2 text-base font-bold text-activity">{activity && <activity.icon aria-hidden className="size-5 shrink-0" />}{tag}</p>
       <h1 className="text-4xl md:text-5xl font-extrabold">{title}</h1>
     </div>
   );

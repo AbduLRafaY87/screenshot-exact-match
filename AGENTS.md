@@ -12,4 +12,5 @@
 
 - The shared playground shell owns navigation and profile prompts so every practice page remains reachable from the same menu.
 - Keep practice destinations in one shared registry so sidebar options and home tiles remain consistent.
+- Use each registry entry's semantic activity theme on home tiles, menu items and practice titles so activity colors remain consistent across navigation.
 - The display name is a device-only preference, like language; hydrate it after mount and allow practice without a name or available browser storage.
