@@ -11,6 +11,8 @@ export const Route = createFileRoute("/forms")({
       { name: "description", content: "Practice official forms with every confusing term explained in plain English and Urdu." },
       { property: "og:title", content: "Government Form Practice — ClickWise" },
       { property: "og:description", content: "Practice official forms with every confusing term explained in plain English and Urdu." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Page,

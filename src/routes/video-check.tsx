@@ -11,6 +11,8 @@ export const Route = createFileRoute("/video-check")({
       { name: "description", content: "Test your camera and microphone and learn to allow browser permissions before family calls." },
       { property: "og:title", content: "Camera & Mic Check — ClickWise" },
       { property: "og:description", content: "Test your camera and microphone and learn to allow browser permissions before family calls." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Page,

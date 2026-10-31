@@ -1,40 +1,25 @@
-import { Link } from "@tanstack/react-router";
-import { ShieldCheck, LifeBuoy, MousePointerClick } from "lucide-react";
+import { Menu, LifeBuoy, Pencil } from "lucide-react";
 import { useT } from "@/lib/i18n";
+import { useProfile } from "@/lib/profile";
 import { cn } from "@/lib/utils";
+import { Btn } from "./kit";
 
-export function Header({ onHelp }: { onHelp: () => void }) {
+export function Header({ onHelp, onMenu }: { onHelp: () => void; onMenu: () => void }) {
   const { t, lang, setLang } = useT();
+  const { editName } = useProfile();
   return (
-    <header className="sticky top-0 z-40 border-b border-ink-foreground/10 bg-ink/95 text-ink-foreground backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-3">
-        <Link to="/" className="flex items-center gap-2 rounded-lg text-2xl font-display font-extrabold" aria-label={t("home")}>
-          <span className="grid size-11 place-items-center rounded-xl bg-primary"><MousePointerClick aria-hidden /></span>
-          {t("appName")}
-        </Link>
-        <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-success px-3 py-1.5 text-base font-bold text-success-foreground">
-          <ShieldCheck aria-hidden className="size-5" /> {t("safeBadge")}
-        </span>
-        <div className="ms-auto flex items-center gap-2">
-          <div role="group" aria-label="Language" className="flex rounded-full border-2 border-ink-foreground p-1">
+    <header className="sticky top-0 z-30 border-b bg-card/95 backdrop-blur-md">
+      <div className="flex flex-wrap items-center gap-2 px-4 py-3 md:px-8">
+        <Btn variant="soft" className="px-3 lg:hidden" onClick={onMenu} aria-label={t("openMenu")}><Menu aria-hidden /></Btn>
+        <span className="hidden text-base font-bold text-muted-foreground xl:inline">{t("yourSpace")}</span>
+        <div className="ms-auto flex flex-wrap items-center gap-2">
+          <div role="group" aria-label={t("language")} className="flex rounded-lg border bg-background p-1">
             {(["en", "ur"] as const).map((l) => (
-              <button
-                key={l}
-                onClick={() => setLang(l)}
-                aria-pressed={lang === l}
-                className={cn(
-                  "min-h-12 rounded-full px-4 text-lg font-bold transition",
-                  lang === l ? "bg-ink-foreground text-ink" : "text-ink-foreground",
-                )}
-              >
-                {l === "en" ? "English" : "اردو"}
-              </button>
+              <Btn key={l} variant="soft" onClick={() => setLang(l)} aria-pressed={lang === l} className={cn("min-h-11 rounded-md px-3 text-base shadow-none", lang === l ? "bg-primary text-primary-foreground" : "bg-transparent text-muted-foreground")}>{t(l === "en" ? "english" : "urdu")}</Btn>
             ))}
           </div>
-          <button onClick={onHelp} className="tap inline-flex items-center gap-2 rounded-xl bg-primary text-lg font-bold text-primary-foreground">
-            <LifeBuoy aria-hidden /> <span className="hidden md:inline">{t("needGuidance")}</span>
-            <span className="md:hidden sr-only">{t("needGuidance")}</span>
-          </button>
+          <Btn variant="soft" onClick={editName} className="px-3 lg:hidden" aria-label={t("changeName")}><Pencil aria-hidden className="size-5" /></Btn>
+          <Btn onClick={onHelp} className="px-3 text-base"><LifeBuoy aria-hidden className="size-5" /><span className="hidden sm:inline">{t("needGuidance")}</span><span className="sr-only sm:hidden">{t("needGuidance")}</span></Btn>
         </div>
       </div>
     </header>

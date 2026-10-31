@@ -12,7 +12,10 @@ import { useEffect, useState, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { LanguageProvider } from "@/lib/i18n";
+import { LanguageProvider, useT } from "@/lib/i18n";
+import { ProfileProvider } from "@/lib/profile";
+import { PlaygroundSidebar } from "@/components/PlaygroundSidebar";
+import * as Dialog from "@radix-ui/react-dialog";
 import { Header } from "@/components/Header";
 import { CompanionBar } from "@/components/CompanionBar";
 
@@ -119,18 +122,33 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const [helpOpen, setHelpOpen] = useState(false);
-
   return (
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
-        <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-card focus:p-4">Skip to content</a>
-        <Header onHelp={() => setHelpOpen(true)} />
-        <main id="main" className="mx-auto max-w-6xl px-4 pt-8 pb-56">
-          <Outlet />
-        </main>
-        <CompanionBar open={helpOpen} setOpen={setHelpOpen} />
+        <ProfileProvider><PlaygroundLayout /></ProfileProvider>
       </LanguageProvider>
     </QueryClientProvider>
   );
+}
+
+function PlaygroundLayout() {
+  const { t, dir } = useT();
+  const [helpOpen, setHelpOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  return <div className="min-h-screen lg:ps-72">
+    <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-card focus:p-4">{t("skipContent")}</a>
+    <div className="fixed inset-y-0 start-0 z-40 hidden w-72 border-e lg:block"><PlaygroundSidebar /></div>
+    <Header onHelp={() => setHelpOpen(true)} onMenu={() => setMenuOpen(true)} />
+    <main id="main" className="mx-auto max-w-7xl px-4 pt-8 pb-16 md:px-8"><Outlet /></main>
+    <CompanionBar open={helpOpen} setOpen={setHelpOpen} />
+    <Dialog.Root open={menuOpen} onOpenChange={setMenuOpen}>
+      <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 z-40 bg-foreground/40 lg:hidden" />
+        <Dialog.Content dir={dir} aria-describedby={undefined} className="fixed inset-y-0 start-0 z-50 w-80 max-w-[90vw] overflow-y-auto bg-card lg:hidden">
+          <Dialog.Title className="sr-only">{t("practiceMenu")}</Dialog.Title>
+          <PlaygroundSidebar mobile onNavigate={() => setMenuOpen(false)} />
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
+  </div>;
 }

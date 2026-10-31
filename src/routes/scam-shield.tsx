@@ -11,6 +11,8 @@ export const Route = createFileRoute("/scam-shield")({
       { name: "description", content: "Check suspicious SMS and email screenshots for fake links and urgency red flags." },
       { property: "og:title", content: "Scam Shield — ClickWise" },
       { property: "og:description", content: "Check suspicious SMS and email screenshots for fake links and urgency red flags." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Page,
