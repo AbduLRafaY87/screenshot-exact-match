@@ -11,9 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BankingRouteImport } from './routes/banking'
+import { Route as BasicsRouteImport } from './routes/basics'
 import { Route as FormsRouteImport } from './routes/forms'
 import { Route as ScamShieldRouteImport } from './routes/scam-shield'
 import { Route as VideoCheckRouteImport } from './routes/video-check'
+import { Route as WordsRouteImport } from './routes/words'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,6 +25,11 @@ const IndexRoute = IndexRouteImport.update({
 const BankingRoute = BankingRouteImport.update({
   id: '/banking',
   path: '/banking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BasicsRoute = BasicsRouteImport.update({
+  id: '/basics',
+  path: '/basics',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FormsRoute = FormsRouteImport.update({
@@ -40,43 +47,78 @@ const VideoCheckRoute = VideoCheckRouteImport.update({
   path: '/video-check',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WordsRoute = WordsRouteImport.update({
+  id: '/words',
+  path: '/words',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/banking': typeof BankingRoute
+  '/basics': typeof BasicsRoute
   '/forms': typeof FormsRoute
   '/scam-shield': typeof ScamShieldRoute
   '/video-check': typeof VideoCheckRoute
+  '/words': typeof WordsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/banking': typeof BankingRoute
+  '/basics': typeof BasicsRoute
   '/forms': typeof FormsRoute
   '/scam-shield': typeof ScamShieldRoute
   '/video-check': typeof VideoCheckRoute
+  '/words': typeof WordsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/banking': typeof BankingRoute
+  '/basics': typeof BasicsRoute
   '/forms': typeof FormsRoute
   '/scam-shield': typeof ScamShieldRoute
   '/video-check': typeof VideoCheckRoute
+  '/words': typeof WordsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/banking' | '/forms' | '/scam-shield' | '/video-check'
+  fullPaths:
+    | '/'
+    | '/banking'
+    | '/basics'
+    | '/forms'
+    | '/scam-shield'
+    | '/video-check'
+    | '/words'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/banking' | '/forms' | '/scam-shield' | '/video-check'
-  id: '__root__' | '/' | '/banking' | '/forms' | '/scam-shield' | '/video-check'
+  to:
+    | '/'
+    | '/banking'
+    | '/basics'
+    | '/forms'
+    | '/scam-shield'
+    | '/video-check'
+    | '/words'
+  id:
+    | '__root__'
+    | '/'
+    | '/banking'
+    | '/basics'
+    | '/forms'
+    | '/scam-shield'
+    | '/video-check'
+    | '/words'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BankingRoute: typeof BankingRoute
+  BasicsRoute: typeof BasicsRoute
   FormsRoute: typeof FormsRoute
   ScamShieldRoute: typeof ScamShieldRoute
   VideoCheckRoute: typeof VideoCheckRoute
+  WordsRoute: typeof WordsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -93,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/banking'
       fullPath: '/banking'
       preLoaderRoute: typeof BankingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/basics': {
+      id: '/basics'
+      path: '/basics'
+      fullPath: '/basics'
+      preLoaderRoute: typeof BasicsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/forms': {
@@ -116,15 +165,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VideoCheckRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/words': {
+      id: '/words'
+      path: '/words'
+      fullPath: '/words'
+      preLoaderRoute: typeof WordsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BankingRoute: BankingRoute,
+  BasicsRoute: BasicsRoute,
   FormsRoute: FormsRoute,
   ScamShieldRoute: ScamShieldRoute,
   VideoCheckRoute: VideoCheckRoute,
+  WordsRoute: WordsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

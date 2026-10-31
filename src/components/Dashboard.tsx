@@ -1,14 +1,16 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Landmark, Video, FileText, ShieldAlert, ArrowRight } from "lucide-react";
+import { Hand, BookOpen, Landmark, Video, FileText, ShieldAlert, ArrowRight } from "lucide-react";
 import { useT } from "@/lib/i18n";
 import type { Key } from "@/lib/translations";
 
 const modules = [
+  { to: "/basics", icon: Hand, tag: "m5Tag", title: "m5Title", sub: "m5Sub", tone: "bg-ink text-ink-foreground" },
   { to: "/banking", icon: Landmark, tag: "m1Tag", title: "m1Title", sub: "m1Sub", tone: "bg-primary text-primary-foreground" },
   { to: "/video-check", icon: Video, tag: "m2Tag", title: "m2Title", sub: "m2Sub", tone: "bg-success text-success-foreground" },
   { to: "/forms", icon: FileText, tag: "m3Tag", title: "m3Title", sub: "m3Sub", tone: "bg-warn text-primary-foreground" },
   { to: "/scam-shield", icon: ShieldAlert, tag: "m4Tag", title: "m4Title", sub: "m4Sub", tone: "bg-destructive text-destructive-foreground" },
+  { to: "/words", icon: BookOpen, tag: "m6Tag", title: "m6Title", sub: "m6Sub", tone: "bg-warn text-primary-foreground" },
 ] as const;
 
 export function Dashboard() {
