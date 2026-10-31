@@ -11,8 +11,8 @@ export function CompanionBar({ open, setOpen }: { open: boolean; setOpen: (o: bo
   const { t } = useT();
   const [answer, setAnswer] = useState<Key | null>(null);
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 px-3 pb-3">
-      <div className="mx-auto max-w-4xl rounded-2xl border-2 border-ink bg-card shadow-card">
+    <div className="fixed inset-x-0 bottom-0 z-40 px-3 pb-3 lg:ps-[calc(18rem+0.75rem)]">
+      {open && <div className="mx-auto max-w-4xl rounded-lg border bg-card shadow-lift">
         <AnimatePresence>
           {open && (
             <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
@@ -48,7 +48,7 @@ export function CompanionBar({ open, setOpen }: { open: boolean; setOpen: (o: bo
             </button>
           ))}
         </div>
-      </div>
+      </div>}
     </div>
   );
 }

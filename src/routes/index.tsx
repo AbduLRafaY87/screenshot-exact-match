@@ -8,6 +8,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Practice banking, video calls, forms and spotting scams in a 100% safe sandbox, in English or Urdu." },
       { property: "og:title", content: "ClickWise — Safe tech practice" },
       { property: "og:description", content: "Build digital confidence in a 100% safe sandbox, in English or Urdu." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Dashboard,

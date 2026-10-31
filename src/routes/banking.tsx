@@ -11,6 +11,8 @@ export const Route = createFileRoute("/banking")({
       { name: "description", content: "Practice bank logouts and entering OTP codes safely in a pretend bank." },
       { property: "og:title", content: "Banking Practice — ClickWise" },
       { property: "og:description", content: "Practice bank logouts and entering OTP codes safely in a pretend bank." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Page,
