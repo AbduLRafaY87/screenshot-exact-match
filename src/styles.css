@@ -40,6 +40,9 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-activity: var(--activity);
+  --color-activity-soft: var(--activity-soft);
+  --color-activity-border: var(--activity-border);
 }
 
 :root {
@@ -71,6 +74,27 @@
   --border: oklch(0.85 0.015 260);
   --input: oklch(0.6 0.03 260);
   --ring: oklch(0.43 0.095 180);
+  --practice-basics: oklch(0.41 0.15 300);
+  --practice-basics-soft: oklch(0.96 0.025 300);
+  --practice-basics-border: oklch(0.78 0.09 300);
+  --practice-banking: oklch(0.4 0.13 250);
+  --practice-banking-soft: oklch(0.96 0.025 250);
+  --practice-banking-border: oklch(0.77 0.09 250);
+  --practice-video: oklch(0.38 0.095 160);
+  --practice-video-soft: oklch(0.96 0.035 160);
+  --practice-video-border: oklch(0.76 0.09 160);
+  --practice-forms: oklch(0.42 0.095 75);
+  --practice-forms-soft: oklch(0.97 0.05 90);
+  --practice-forms-border: oklch(0.78 0.12 85);
+  --practice-scam: oklch(0.43 0.16 22);
+  --practice-scam-soft: oklch(0.97 0.025 22);
+  --practice-scam-border: oklch(0.78 0.09 22);
+  --practice-words: oklch(0.4 0.095 200);
+  --practice-words-soft: oklch(0.96 0.035 200);
+  --practice-words-border: oklch(0.76 0.08 200);
+  --activity: var(--primary);
+  --activity-soft: var(--secondary);
+  --activity-border: var(--border);
   --shadow-card: 0 1px 2px oklch(0.2 0.03 260 / 0.06), 0 18px 40px -22px oklch(0.2 0.03 260 / 0.35);
   --shadow-lift: 0 2px 4px oklch(0.2 0.03 260 / 0.08), 0 28px 50px -24px oklch(0.45 0.2 262 / 0.45);
   --gradient-hero: radial-gradient(120% 140% at 0% 0%, oklch(0.55 0.2 262) 0%, oklch(0.32 0.14 265) 55%, oklch(0.21 0.035 262) 100%);
@@ -98,6 +122,17 @@
 @utility shadow-lift { box-shadow: var(--shadow-lift); }
 @utility bg-hero { background-image: var(--gradient-hero); }
 @utility tap { min-height: 56px; padding-inline: 1.25rem; }
+
+.activity-basics { --activity: var(--practice-basics); --activity-soft: var(--practice-basics-soft); --activity-border: var(--practice-basics-border); }
+.activity-banking { --activity: var(--practice-banking); --activity-soft: var(--practice-banking-soft); --activity-border: var(--practice-banking-border); }
+.activity-video { --activity: var(--practice-video); --activity-soft: var(--practice-video-soft); --activity-border: var(--practice-video-border); }
+.activity-forms { --activity: var(--practice-forms); --activity-soft: var(--practice-forms-soft); --activity-border: var(--practice-forms-border); }
+.activity-scam { --activity: var(--practice-scam); --activity-soft: var(--practice-scam-soft); --activity-border: var(--practice-scam-border); }
+.activity-words { --activity: var(--practice-words); --activity-soft: var(--practice-words-soft); --activity-border: var(--practice-words-border); }
+.activity-card { border-color: var(--activity-border); border-top: 6px solid var(--activity); background-color: var(--activity-soft); }
+.activity-card:hover { border-color: var(--activity); }
+.activity-nav:hover { background-color: var(--activity-soft); }
+.activity-nav[aria-current="page"] { background-color: var(--activity-soft); color: var(--activity); border-inline-start: 4px solid var(--activity); }
 
 @keyframes glow-ring {
   0%, 100% { box-shadow: 0 0 0 4px var(--color-primary), 0 0 0 10px color-mix(in oklab, var(--color-primary) 25%, transparent); }

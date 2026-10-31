@@ -21,12 +21,12 @@ export function Dashboard() {
       <ul className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {practiceModules.map((m) => (
           <li key={m.to}>
-            <Link to={m.to} className="group flex h-full flex-col items-start rounded-lg border bg-card p-5 shadow-card transition hover:border-primary hover:shadow-lift">
-              <span className={`mb-5 grid size-14 shrink-0 place-items-center rounded-lg ${m.tone}`}><m.icon aria-hidden className="size-7" /></span>
-              <span className="mb-2 text-sm font-bold text-muted-foreground">{t(m.tag)}</span>
+            <Link to={m.to} className={`activity-card ${m.tone} group flex h-full flex-col items-start rounded-lg border p-5 shadow-card transition hover:shadow-lift`}>
+              <span className="mb-5 grid size-14 shrink-0 place-items-center rounded-lg bg-activity text-primary-foreground"><m.icon aria-hidden className="size-7" /></span>
+              <span className="mb-2 text-sm font-bold text-activity">{t(m.tag)}</span>
               <h3 className="text-xl font-bold leading-snug">{t(m.title)}</h3>
               <p className="mb-5 mt-3 text-base text-muted-foreground">{t(m.sub)}</p>
-              <span className="mt-auto flex min-h-12 w-full items-center justify-between border-t pt-3 text-base font-bold text-primary">{t("start")}<ArrowRight aria-hidden className="size-5 transition group-hover:translate-x-1 rtl:rotate-180" /></span>
+              <span className="mt-auto flex min-h-12 w-full items-center justify-between border-t border-activity-border pt-3 text-base font-bold text-activity">{t("start")}<ArrowRight aria-hidden className="size-5 transition group-hover:translate-x-1 rtl:rotate-180" /></span>
             </Link>
           </li>
         ))}

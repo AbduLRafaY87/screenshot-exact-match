@@ -1,12 +1,12 @@
 import { Hand, Landmark, Video, FileText, ShieldAlert, BookOpen } from "lucide-react";
 
 export const practiceModules = [
-  { to: "/basics", icon: Hand, tag: "m5Tag", title: "m5Title", sub: "m5Sub", tone: "bg-secondary text-secondary-foreground" },
-  { to: "/banking", icon: Landmark, tag: "m1Tag", title: "m1Title", sub: "m1Sub", tone: "bg-primary text-primary-foreground" },
-  { to: "/video-check", icon: Video, tag: "m2Tag", title: "m2Title", sub: "m2Sub", tone: "bg-success-soft text-success" },
-  { to: "/forms", icon: FileText, tag: "m3Tag", title: "m3Title", sub: "m3Sub", tone: "bg-warn-soft text-warn" },
-  { to: "/scam-shield", icon: ShieldAlert, tag: "m4Tag", title: "m4Title", sub: "m4Sub", tone: "bg-danger-soft text-destructive" },
-  { to: "/words", icon: BookOpen, tag: "m6Tag", title: "m6Title", sub: "m6Sub", tone: "bg-secondary text-secondary-foreground" },
+  { to: "/basics", icon: Hand, tag: "m5Tag", title: "m5Title", sub: "m5Sub", tone: "activity-basics" },
+  { to: "/banking", icon: Landmark, tag: "m1Tag", title: "m1Title", sub: "m1Sub", tone: "activity-banking" },
+  { to: "/video-check", icon: Video, tag: "m2Tag", title: "m2Title", sub: "m2Sub", tone: "activity-video" },
+  { to: "/forms", icon: FileText, tag: "m3Tag", title: "m3Title", sub: "m3Sub", tone: "activity-forms" },
+  { to: "/scam-shield", icon: ShieldAlert, tag: "m4Tag", title: "m4Title", sub: "m4Sub", tone: "activity-scam" },
+  { to: "/words", icon: BookOpen, tag: "m6Tag", title: "m6Title", sub: "m6Sub", tone: "activity-words" },
 ] as const;
 
 export const PROFILE_KEY = "cw-profile";
