@@ -18,7 +18,7 @@ export const Btn = forwardRef<HTMLButtonElement, BtnProps>(({ variant = "primary
   <button
     ref={ref}
     className={cn(
-      "tap inline-flex items-center justify-center gap-2 rounded-xl text-lg font-bold transition disabled:opacity-50 disabled:cursor-not-allowed",
+      "tap inline-flex items-center justify-center gap-2 rounded-full text-lg font-bold shadow-sm transition active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed",
       variants[variant],
       className,
     )}
@@ -76,7 +76,7 @@ export function GuidePanel({
           exit={{ opacity: 0 }}
           role="status"
           aria-live="polite"
-          className={cn("rounded-2xl border-l-8 p-5 text-xl shadow-card", toneCls)}
+          className={cn("rounded-3xl border border-s-8 p-6 text-xl leading-relaxed shadow-card", toneCls)}
         >
           {message}
         </motion.div>
@@ -104,8 +104,8 @@ export function GuidePanel({
 export function PageTitle({ tag, title }: { tag: string; title: string }) {
   return (
     <div className="mb-8 space-y-2">
-      <p className="text-lg font-bold text-primary">{tag}</p>
-      <h1 className="text-3xl md:text-4xl font-bold">{title}</h1>
+      <p className="inline-flex rounded-full bg-secondary px-4 py-1 text-base font-bold text-secondary-foreground">{tag}</p>
+      <h1 className="text-4xl md:text-5xl font-extrabold">{title}</h1>
     </div>
   );
 }
