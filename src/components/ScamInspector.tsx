@@ -34,7 +34,8 @@ export function ScamInspector() {
   const barCls = score >= 60 ? "bg-destructive" : score >= 30 ? "bg-warn" : "bg-success";
   const steps = kind === "scam" ? t("scamSteps") : kind === "safe" ? t("safeSteps") : t("uploadSteps");
 
-  const guide = loading ? t("analyzing") : active ? t(active) : kind === "upload" ? t("uploadInfo") : kind ? steps : t("sG1");
+  const step = !kind ? 1 : active || flagsChecked > 0 ? 3 : 2;
+  const guide = loading ? t("analyzing") : active ? t(active) : kind === "upload" ? t("uploadInfo") : step === 3 ? t("sG3") : step === 2 ? t("sG2") : t("sG1");
 
   const Hot = ({ k, ok, children, className }: { k: Key; ok?: boolean; children: React.ReactNode; className?: string }) => (
     <motion.button
@@ -46,7 +47,14 @@ export function ScamInspector() {
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_1.3fr]">
-      <GuidePanel message={guide} tone={kind === "scam" ? "warn" : kind === "safe" ? "success" : "info"} />
+      <GuidePanel
+        message={guide}
+        tone={kind === "scam" ? "warn" : kind === "safe" ? "success" : "info"}
+        stepLabel={`${t("step")} ${step} ${t("of")} 3`}
+        onPrev={step > 1 ? () => { if (step === 3) { setActive(null); setChecks({}); } else { setKind(null); setImg(null); } } : undefined}
+        onNext={step < 3 ? () => { if (step === 2) setActive(kind === "scam" ? "flag1Body" : kind === "safe" ? "ok1Body" : null); } : undefined}
+        nextDisabled={step === 1 && !kind}
+      />
 
       <section className="space-y-5">
         <div className="grid gap-3 sm:grid-cols-2">
@@ -71,7 +79,8 @@ export function ScamInspector() {
         {kind && (
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-5 rounded-2xl border-2 bg-card p-5 shadow-card">
             {kind !== "upload" ? (
-              <div className="rounded-2xl bg-muted p-5" dir="ltr">
+              <div className="mx-auto max-w-md rounded-[2rem] border-8 border-ink bg-muted p-4 shadow-card" dir="ltr">
+                <div className="mx-auto mb-3 h-2 w-20 rounded-full bg-ink/40" aria-hidden />
                 <p className="mb-2 text-base text-muted-foreground">
                   {kind === "scam" ? <Hot k="flag3Body">+92 301 4455667</Hot> : <Hot k="ok1Body" ok>LESCO</Hot>}
                 </p>

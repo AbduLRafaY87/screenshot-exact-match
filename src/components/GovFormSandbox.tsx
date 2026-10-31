@@ -24,7 +24,13 @@ export function GovFormSandbox() {
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_1.3fr]">
-      <GuidePanel message={guide} tone={mode === "fill" ? "info" : "success"} stepLabel={mode === "fill" ? `${t("step")} ${i + 1} ${t("of")} ${fields.length}` : undefined} />
+      <GuidePanel
+        message={guide}
+        tone={mode === "fill" ? "info" : "success"}
+        stepLabel={mode === "fill" ? `${t("step")} ${i + 1} ${t("of")} ${fields.length}` : undefined}
+        onPrev={mode === "fill" && i > 0 ? () => { setI(i - 1); setShowPlain(false); } : mode === "review" ? () => { setMode("fill"); setI(fields.length - 1); } : undefined}
+        onNext={mode === "fill" ? () => { setShowPlain(false); i < fields.length - 1 ? setI(i + 1) : setMode("review"); } : mode === "review" ? () => setMode("done") : undefined}
+      />
 
       <section className="rounded-2xl border-2 bg-card p-6 shadow-card">
         <h2 className="mb-2 text-2xl font-bold">{t("formTitle")}</h2>

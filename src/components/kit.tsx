@@ -1,6 +1,6 @@
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Volume2, Sparkles } from "lucide-react";
+import { Volume2, Sparkles, ShieldCheck, ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { speak, useT } from "@/lib/i18n";
 
@@ -27,17 +27,33 @@ export const Btn = forwardRef<HTMLButtonElement, BtnProps>(({ variant = "primary
 ));
 Btn.displayName = "Btn";
 
-export function SpeakButton({ text, className }: { text: string; className?: string }) {
+export function SpeakButton({ text, className, label }: { text: string; className?: string; label?: string | undefined }) {
   const { t, lang } = useT();
   return (
     <Btn variant="soft" className={cn("text-base", className)} onClick={() => speak(text, lang) || alert(t("noVoice"))}>
-      <Volume2 aria-hidden className="size-6" /> {t("readAloud")}
+      <Volume2 aria-hidden className="size-6" /> {label ?? t("readAloud")}
     </Btn>
   );
 }
 
-/** Left-side guide panel with animated message. */
-export function GuidePanel({ message, tone = "info", stepLabel, children }: { message: string; tone?: "info" | "success" | "warn"; stepLabel?: string | undefined; children?: ReactNode }) {
+/** Left-side instructor panel with animated message, safety badge, and self-paced nav. */
+export function GuidePanel({
+  message,
+  tone = "info",
+  stepLabel,
+  onPrev,
+  onNext,
+  nextDisabled,
+  children,
+}: {
+  message: string;
+  tone?: "info" | "success" | "warn";
+  stepLabel?: string | undefined;
+  onPrev?: (() => void) | undefined;
+  onNext?: (() => void) | undefined;
+  nextDisabled?: boolean | undefined;
+  children?: ReactNode;
+}) {
   const { t } = useT();
   const toneCls = tone === "success" ? "bg-success-soft border-success" : tone === "warn" ? "bg-warn-soft border-warn" : "bg-card border-primary";
   return (
@@ -49,6 +65,9 @@ export function GuidePanel({ message, tone = "info", stepLabel, children }: { me
           {stepLabel && <p className="text-muted-foreground">{stepLabel}</p>}
         </div>
       </div>
+      <p className="flex items-center gap-2 rounded-xl bg-success-soft px-4 py-2.5 text-base font-bold text-success">
+        <ShieldCheck aria-hidden className="size-5 shrink-0" /> {t("instructorBadge")}
+      </p>
       <AnimatePresence mode="wait">
         <motion.div
           key={message}
@@ -62,7 +81,21 @@ export function GuidePanel({ message, tone = "info", stepLabel, children }: { me
           {message}
         </motion.div>
       </AnimatePresence>
-      <SpeakButton text={message} />
+      <SpeakButton text={message} label={t("listen")} />
+      {(onPrev || onNext) && (
+        <div className="flex gap-3">
+          {onPrev && (
+            <Btn variant="outline" onClick={onPrev} className="flex-1">
+              <ArrowLeft aria-hidden className="rtl:rotate-180" /> {t("previous")}
+            </Btn>
+          )}
+          {onNext && (
+            <Btn onClick={onNext} disabled={nextDisabled} className="flex-1">
+              {t("next")} <ArrowRight aria-hidden className="rtl:rotate-180" />
+            </Btn>
+          )}
+        </div>
+      )}
       {children}
     </aside>
   );
