@@ -20,7 +20,7 @@ function Page() {
   const { t } = useT();
   return (
     <>
-      <Link to="/" className="tap mb-6 inline-flex items-center gap-2 rounded-xl border-2 border-input bg-card text-lg font-bold">
+      <Link to="/" className="tap mb-6 inline-flex items-center gap-2 rounded-full border bg-card shadow-card hover:bg-muted text-lg font-bold">
         <ArrowLeft aria-hidden className="rtl:rotate-180" /> {t("back")}
       </Link>
       <PageTitle tag={t("m4Tag")} title={t("m4Title")} />

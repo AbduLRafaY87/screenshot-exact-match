@@ -6,9 +6,9 @@ import { cn } from "@/lib/utils";
 export function Header({ onHelp }: { onHelp: () => void }) {
   const { t, lang, setLang } = useT();
   return (
-    <header className="sticky top-0 z-40 bg-ink text-ink-foreground">
+    <header className="sticky top-0 z-40 border-b border-ink-foreground/10 bg-ink/95 text-ink-foreground backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-3">
-        <Link to="/" className="flex items-center gap-2 rounded-lg text-2xl font-bold" aria-label={t("home")}>
+        <Link to="/" className="flex items-center gap-2 rounded-lg text-2xl font-display font-extrabold" aria-label={t("home")}>
           <span className="grid size-11 place-items-center rounded-xl bg-primary"><MousePointerClick aria-hidden /></span>
           {t("appName")}
         </Link>
