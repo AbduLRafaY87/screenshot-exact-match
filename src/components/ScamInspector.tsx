@@ -79,7 +79,8 @@ export function ScamInspector() {
         {kind && (
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-5 rounded-2xl border-2 bg-card p-5 shadow-card">
             {kind !== "upload" ? (
-              <div className="rounded-2xl bg-muted p-5" dir="ltr">
+              <div className="mx-auto max-w-md rounded-[2rem] border-8 border-ink bg-muted p-4 shadow-card" dir="ltr">
+                <div className="mx-auto mb-3 h-2 w-20 rounded-full bg-ink/40" aria-hidden />
                 <p className="mb-2 text-base text-muted-foreground">
                   {kind === "scam" ? <Hot k="flag3Body">+92 301 4455667</Hot> : <Hot k="ok1Body" ok>LESCO</Hot>}
                 </p>
