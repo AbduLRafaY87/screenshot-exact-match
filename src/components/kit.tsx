@@ -37,7 +37,7 @@ export function SpeakButton({ text, className }: { text: string; className?: str
 }
 
 /** Left-side guide panel with animated message. */
-export function GuidePanel({ message, tone = "info", stepLabel, children }: { message: string; tone?: "info" | "success" | "warn"; stepLabel?: string; children?: ReactNode }) {
+export function GuidePanel({ message, tone = "info", stepLabel, children }: { message: string; tone?: "info" | "success" | "warn"; stepLabel?: string | undefined; children?: ReactNode }) {
   const { t } = useT();
   const toneCls = tone === "success" ? "bg-success-soft border-success" : tone === "warn" ? "bg-warn-soft border-warn" : "bg-card border-primary";
   return (
@@ -70,7 +70,7 @@ export function GuidePanel({ message, tone = "info", stepLabel, children }: { me
 
 export function PageTitle({ tag, title }: { tag: string; title: string }) {
   return (
-    <div className="mb-8">
+    <div className="mb-8 space-y-2">
       <p className="text-lg font-bold text-primary">{tag}</p>
       <h1 className="text-3xl md:text-4xl font-bold">{title}</h1>
     </div>
